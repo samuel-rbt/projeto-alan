@@ -36,12 +36,12 @@ export default function RankineChart({ currentResult }) {
   const data = {
     datasets: [
       {
-        label: `Ciclo de Rankine (${T_high.toFixed(1)} °C)`,
+        label: `Ciclo Ideal (${T_high.toFixed(1)} °C)`,
         data: cycleData,
         borderColor: '#1e40af', 
         backgroundColor: '#1e40af',
         showLine: true,
-        borderWidth: 2.5,
+        borderWidth: 2,
         pointRadius: 4,
         tension: 0,
       },

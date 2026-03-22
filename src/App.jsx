@@ -1,17 +1,11 @@
 import { useState, useCallback } from 'react'
 import RankineChart from './RankineChart'
-import {
-  satT, satTHeaders, satTKeys, satTUnits,
-  satP, satPHeaders, satPKeys, satPUnits,
-  supData, liqData
-} from './data'
+import { satT, satTHeaders, satTKeys, satTUnits, satP, satPHeaders, satPKeys, satPUnits, supData, liqData } from './data'
 import styles from './App.module.css'
 
 function fmt(v) {
   if (typeof v !== 'number') return v
-  if (Math.abs(v) < 0.0001) return v.toExponential(4)
-  if (Math.abs(v) < 10) return parseFloat(v.toPrecision(5)).toString()
-  return parseFloat(v.toPrecision(6)).toString()
+  return Math.abs(v) < 0.0001 ? v.toExponential(4) : parseFloat(v.toPrecision(5)).toString()
 }
 
 function interpQuad(x0, y0, x1, y1, x2, y2, x) {
@@ -35,8 +29,8 @@ function findThreePoints(arr, val, idx) {
 const NAV_ITEMS = [
   { id: 'sat-t', label: 'T-SAT' },
   { id: 'sat-p', label: 'P-SAT' },
-  { id: 'sup',   label: 'SUPERAQUECIDO' },
-  { id: 'liq',   label: 'COMPRIMIDO' },
+  { id: 'sup',   label: 'VAPOR SUPERAQUECIDO' },
+  { id: 'liq',   label: 'LÍQUIDO COMPRIMIDO' },
 ]
 
 export default function App() {
@@ -49,7 +43,7 @@ export default function App() {
 
   const handleSearch = useCallback(() => {
     const val = parseFloat(searchVal)
-    if (isNaN(val)) { alert('Insira um valor numérico válido.'); return }
+    if (isNaN(val)) return
     setHighlightVal(val)
 
     let currentData, keys, units;
@@ -59,15 +53,10 @@ export default function App() {
     else { currentData = liqData[liqKey].rows; keys = ['T','v','h','s']; units = ['°C','m³/kg','kJ/kg','kJ/kg·K']; }
 
     const pts = findThreePoints(currentData, val, 0)
-    if (pts[0] === -1) { setResult({ error: `Valor fora do intervalo técnico.` }); return }
+    if (pts[0] === -1) { setResult({ error: 'Fora do intervalo' }); return }
 
-    const [p0, p1, p2] = pts;
-    const row = keys.map((_, i) => interpQuad(currentData[p0][0], currentData[p0][i], currentData[p1][0], currentData[p1][i], currentData[p2][0], currentData[p2][i], val));
-
-    setResult({ 
-      title: tab === 'sat-p' ? `P = ${val} bar` : `T = ${val} °C`, 
-      keys, units, values: row, rawVal: tab === 'sat-p' ? row[1] : val 
-    })
+    const row = keys.map((_, i) => interpQuad(currentData[pts[0]][0], currentData[pts[0]][i], currentData[pts[1]][0], currentData[pts[1]][i], currentData[pts[2]][0], currentData[pts[2]][i], val));
+    setResult({ values: row, keys, units, rawVal: tab === 'sat-p' ? row[1] : val })
   }, [tab, searchVal, supKey, liqKey])
 
   const { headers, rows, keyIdx } = (tab === 'sat-t') ? { headers: satTHeaders, rows: satT, keyIdx: 0 } 
@@ -106,7 +95,7 @@ export default function App() {
               <select value={liqKey} onChange={e => setLiqKey(e.target.value)}>
                 {Object.keys(liqData).map(k => <option key={k} value={k}>{k} MPa</option>)}
               </select>
-            ) : <div className={styles.staticInfo}>Saturação Automática</div>}
+            ) : <div style={{fontSize: '12px', color: '#94a3b8', padding: '8px 0'}}>Saturação Automática</div>}
           </div>
 
           <div className={styles.inputGroup}>
@@ -114,24 +103,22 @@ export default function App() {
             <input type="number" value={searchVal} onChange={e => setSearchVal(e.target.value)} placeholder="0.00" onKeyDown={e => e.key === 'Enter' && handleSearch()} />
           </div>
 
-          <button className={styles.searchBtn} onClick={handleSearch}>PROCESSAR</button>
+          <button className={styles.searchBtn} onClick={handleSearch}>EXECUTAR ANÁLISE</button>
         </aside>
 
         <main className={styles.contentArea}>
           <div className={styles.analyzerContainer}>
             
-            {/* 1. GRÁFICO  */}
             <div className={styles.dataCard}>
-              <div className={styles.cardHeader}>DIAGRAMA T-s (RANKINE CYCLE)</div>
+              <div className={styles.cardHeader}>Diagrama T-s (Rankine Cycle)</div>
               <div className={styles.chartBox}>
-                <RankineChart currentResult={result} currentTab={tab} />
+                <RankineChart currentResult={result} />
               </div>
             </div>
 
-            {/* 2. RESULTADOS CALCULADOS */}
             {result && !result.error && (
-              <div className={styles.dataCard} style={{borderLeft: '4px solid var(--accent)'}}>
-                <div className={styles.cardHeader} style={{color: 'var(--accent)'}}>ANÁLISE DE DADOS DINÂMICA</div>
+              <div className={styles.dataCard} style={{borderLeft: '4px solid #1e40af'}}>
+                <div className={styles.cardHeader} style={{color: '#1e40af'}}>Análise de Dados</div>
                 <div className={styles.resultsRow}>
                   {result.keys.map((k, i) => (
                     <div key={k} className={styles.resultItem}>
@@ -144,12 +131,9 @@ export default function App() {
               </div>
             )}
 
-            {/* 3. TABELA NO FUNDO */}
             <div className={styles.tableContainer}>
               <table className={styles.table}>
-                <thead>
-                  <tr>{headers.map(h => <th key={h}>{h}</th>)}</tr>
-                </thead>
+                <thead><tr>{headers.map(h => <th key={h}>{h}</th>)}</tr></thead>
                 <tbody>
                   {rows.map((row, i) => (
                     <tr key={i} className={highlightVal !== null && row[keyIdx] === highlightVal ? styles.highlighted : ''}>
