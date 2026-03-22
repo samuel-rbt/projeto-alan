@@ -1,0 +1,23 @@
+:root {
+  --bg-main: #f1f5f9;      /* Fundo cinza claro */
+  --bg-card: #ffffff;      /* Branco puro para áreas de trabalho */
+  --primary: #1e40af;      /* Azul Marinho */
+  --primary-light: #dbeafe;
+  --text-main: #1e293b;    /* Cinza quase preto */
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --accent: #3b82f6;       /* Azul brilhante */
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  margin: 0;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }

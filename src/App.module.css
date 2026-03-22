@@ -1,0 +1,49 @@
+.app { min-height: 100vh; background-color: #f1f5f9; display: flex; flex-direction: column; }
+
+.header {
+  background: #1e40af; color: white; padding: 12px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.logoTitle { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; font-family: var(--font-mono); }
+.headerRight { font-size: 9px; opacity: 0.7; letter-spacing: 1px; }
+
+.topNav { background: white; border-bottom: 1px solid #e2e8f0; display: flex; padding: 0 32px; gap: 32px; }
+
+.navBtn {
+  background: none; border: none; padding: 16px 0; font-size: 12px; font-weight: 700; 
+  color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.2s;
+}
+
+.navBtnActive { color: #1e40af; border-bottom-color: #1e40af; }
+
+.workspace { display: grid; grid-template-columns: 280px 1fr; flex: 1; height: calc(100vh - 100px); }
+
+.sidebarInputs { background: white; border-right: 1px solid #e2e8f0; padding: 32px 24px; display: flex; flex-direction: column; gap: 24px; }
+
+.contentArea { padding: 32px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+
+.analyzerContainer { width: 100%; max-width: 1000px; display: flex; flex-direction: column; gap: 24px; }
+
+.dataCard { background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+.cardHeader { font-size: 10px; font-weight: 700; color: #64748b; margin-bottom: 15px; letter-spacing: 1px; }
+
+.chartBox { height: 380px; width: 100%; }
+
+.resultsRow { display: flex; gap: 24px; flex-wrap: wrap; }
+.resultValue { font-weight: 700; font-size: 18px; color: #1e293b; }
+.unitText { font-size: 10px; color: #64748b; }
+
+.tableContainer { background: white; border-radius: 8px; border: 1px solid #e2e8f0; overflow: auto; max-height: 400px; }
+.table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 11px; }
+.table th { background: #f8fafc; color: #1e40af; padding: 12px; text-align: right; position: sticky; top: 0; border-bottom: 1px solid #e2e8f0; }
+.table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; text-align: right; }
+.highlighted td { background: #dbeafe !important; color: #1e40af !important; font-weight: 700; }
+
+.footer { padding: 10px 32px; background: white; border-top: 1px solid #e2e8f0; font-size: 10px; font-weight: 600; color: #64748b; display: flex; justify-content: space-between; }
+
+.inputGroup { display: flex; flex-direction: column; gap: 8px; }
+.inputLabel { font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase; }
+.staticInfo { font-size: 12px; color: #94a3b8; padding: 8px 0; }
+.searchBtn { background: #1e40af; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer; }
