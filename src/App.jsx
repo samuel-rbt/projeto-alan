@@ -79,7 +79,7 @@ export default function App() {
     <div className={styles.app}>
       <header className={styles.header}>
         <div className={styles.logoTitle}>Termodinâmica água</div>
-        <div className={styles.headerRight}>LABORATORY PRECISION V2.2</div>
+        <div className={styles.headerRight}>Agua e Vapor</div>
       </header>
 
       <nav className={styles.topNav}>
@@ -120,7 +120,7 @@ export default function App() {
         <main className={styles.contentArea}>
           <div className={styles.analyzerContainer}>
             
-            {/* 1. GRÁFICO NO TOPO (Igual à imagem) */}
+            {/* 1. GRÁFICO  */}
             <div className={styles.dataCard}>
               <div className={styles.cardHeader}>DIAGRAMA T-s (RANKINE CYCLE)</div>
               <div className={styles.chartBox}>
@@ -165,8 +165,8 @@ export default function App() {
       </div>
 
       <footer className={styles.footer}>
-        <div>AUTORIA: MURILO ROBERTO MATIAS DA SILVA</div>
-        <div>REGISTRO: 30313473</div>
+        <div>PROPRIEDADE DE: ALAN COTTS DOS ANJOS FERNANDES </div>
+        <div>REGISTRO ACADÊMICO: 29636001</div>
       </footer>
     </div>
   )
