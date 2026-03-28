@@ -1,96 +1,87 @@
 .layout {
   display: flex;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
-/* --- BARRA LATERAL (CONTROLES E MEMORIAL) --- */
-.sidebar {
-  width: 360px;
-  background: var(--bg-surface);
-  border-right: 1px solid var(--border-color);
+/* Lado Esquerdo - Fixo */
+.leftPane {
+  width: 450px;
+  min-width: 400px;
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border-line);
   display: flex;
   flex-direction: column;
-  padding: 2rem;
-  box-shadow: 4px 0 15px rgba(0,0,0,0.03);
-  z-index: 10;
+  padding: 2.5rem;
   overflow-y: auto;
+  z-index: 10;
 }
 
-.header { margin-bottom: 2rem; }
-.logoTitle { font-size: 1.25rem; font-weight: 800; color: var(--primary-dark); letter-spacing: -0.5px; }
-.logoSub { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.header { margin-bottom: 2.5rem; }
+.title { font-size: 2rem; font-weight: 700; color: var(--text-main); letter-spacing: -1px; line-height: 1.1; }
+.title span { color: var(--neon-cyan); }
+.subtitle { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 3px; margin-top: 8px; font-family: var(--font-mono); }
 
 .inputGroup { margin-bottom: 1.5rem; }
-.label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
 
-.memorialCard {
+.memorialBox {
   margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px dashed var(--border-color);
+  background: #000000;
+  border: 1px solid var(--border-line);
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
-.statusTitle { font-size: 0.9rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; }
-.memorialText { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
-.memorialLine { margin: 8px 0; padding-left: 10px; border-left: 2px solid var(--border-color); line-height: 1.6; }
-.formula { display: block; background: var(--bg-page); padding: 8px; border-radius: 4px; margin: 8px 0; font-weight: 600; color: var(--primary-dark); }
+.statusTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border-line);
+}
+.memorialLine {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin: 6px 0;
+  white-space: pre-wrap; /* Mantém o formato da matemática */
+  line-height: 1.6;
+}
 
-/* --- ÁREA PRINCIPAL (GRÁFICO E DADOS) --- */
-.main {
+/* Lado Direito - Dinâmico */
+.rightPane {
   flex: 1;
+  background: var(--bg-base);
+  padding: 2.5rem;
   overflow-y: auto;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.errorBox { background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 8px; font-weight: 500; font-family: var(--font-mono); border: 1px solid #fca5a5; }
+.errorBox { background: rgba(244, 63, 94, 0.1); color: var(--neon-pink); padding: 1rem; border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 4px; font-family: var(--font-mono); font-size: 0.85rem; }
 
-.resultCards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-}
+.resultGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+.dataCard { background: var(--bg-panel); border: 1px solid var(--border-line); padding: 1.5rem; border-radius: 6px; display: flex; flex-direction: column; }
+.dataLabel { font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-dim); margin-bottom: 8px; }
+.dataVal { font-size: 1.5rem; font-weight: 700; color: var(--text-main); font-family: var(--font-mono); }
+.dataUnit { font-size: 0.75rem; color: var(--neon-cyan); margin-top: 4px; font-family: var(--font-mono); }
 
-.dataBox {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.dataLabel { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
-.dataVal { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
-.dataUnit { font-size: 0.75rem; font-weight: 500; color: var(--primary); margin-top: 4px; }
+.chartContainer { background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: 6px; padding: 1.5rem; height: 450px; }
 
-.chartSection {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  height: 450px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
+.tableContainer { background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: 6px; overflow: auto; max-height: 400px; }
+.table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.75rem; }
+.table th { background: #000000; color: var(--neon-cyan); padding: 1rem; text-align: right; position: sticky; top: 0; text-transform: uppercase; }
+.table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border-line); text-align: right; color: var(--text-dim); }
+.highlighted td { background: rgba(34, 211, 238, 0.1) !important; color: var(--text-main) !important; font-weight: 700; border-top: 1px solid var(--neon-cyan); border-bottom: 1px solid var(--neon-cyan); }
 
-.tableSection {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  overflow: auto;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-.table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.8rem; }
-.table th { background: var(--bg-page); color: var(--text-muted); padding: 1rem; text-align: right; position: sticky; top: 0; border-bottom: 1px solid var(--border-color); }
-.table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--bg-page); text-align: right; }
-.highlighted td { background: #e0f2fe !important; color: #0284c7 !important; font-weight: 700; border-top: 1px solid #bae6fd; border-bottom: 1px solid #bae6fd; }
+.footer { margin-top: auto; padding-top: 2rem; font-size: 0.75rem; color: var(--text-dim); text-align: center; font-family: var(--font-mono); }
 
-.footer { margin-top: auto; padding-top: 2rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; }
-
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .layout { flex-direction: column; overflow: auto; }
-  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); box-shadow: none; }
-  .main { overflow: visible; }
+  .leftPane { width: 100%; border-right: none; border-bottom: 1px solid var(--border-line); }
+  .rightPane { overflow: visible; }
 }

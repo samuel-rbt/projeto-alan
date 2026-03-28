@@ -11,9 +11,7 @@ export default function RankineChart({ analysis }) {
   const domeRight = [...satT].reverse().map(row => ({ x: row[7], y: row[0] }));
   
   let T_high = 200; 
-  if (analysis && analysis.T) {
-    T_high = analysis.T;
-  }
+  if (analysis && analysis.T) { T_high = analysis.T; }
   
   const T_low = 40; 
   const getS = (T) => {
@@ -50,8 +48,8 @@ export default function RankineChart({ analysis }) {
       {
         label: `Ciclo Ideal (${T_high.toFixed(1)} °C)`,
         data: cycleData,
-        borderColor: '#0ea5e9', // Azul primário
-        backgroundColor: '#0ea5e9',
+        borderColor: '#22d3ee', // Neon Cyan
+        backgroundColor: '#22d3ee',
         showLine: true,
         borderWidth: 2,
         pointRadius: 0,
@@ -60,7 +58,7 @@ export default function RankineChart({ analysis }) {
       {
         label: 'Cúpula de Saturação',
         data: [...domeLeft, ...domeRight],
-        borderColor: '#94a3b8', // Cinza claro
+        borderColor: '#3f3f46', // Cinza médio
         backgroundColor: 'transparent',
         showLine: true,
         borderWidth: 1.5,
@@ -69,10 +67,10 @@ export default function RankineChart({ analysis }) {
         tension: 0.1,
       },
       {
-        label: isMixture ? 'Mistura Saturada' : 'Ponto Termodinâmico',
+        label: isMixture ? 'Mistura Saturada' : 'Fase do Fluido',
         data: statePoint,
-        borderColor: analysis ? analysis.color : '#f59e0b',
-        backgroundColor: analysis ? analysis.color : '#f59e0b',
+        borderColor: analysis ? analysis.color : '#f43f5e',
+        backgroundColor: analysis ? analysis.color : '#f43f5e',
         showLine: isMixture,
         borderWidth: 3,
         pointRadius: 6,
@@ -86,20 +84,24 @@ export default function RankineChart({ analysis }) {
     responsive: true, maintainAspectRatio: false,
     scales: {
       x: { 
-        type: 'linear', title: { display: true, text: 'Entropia s [kJ/kg·K]', color: '#64748b' }, 
-        grid: { color: '#f1f5f9' }, ticks: { color: '#64748b' } 
+        type: 'linear', title: { display: true, text: 'Entropia (s) [kJ/kg·K]', color: '#a1a1aa', font: {family: "'JetBrains Mono', monospace"} }, 
+        grid: { color: '#27272a' }, ticks: { color: '#a1a1aa', font: {family: "'JetBrains Mono', monospace"} } 
       },
       y: { 
-        title: { display: true, text: 'Temperatura T [°C]', color: '#64748b' }, 
-        grid: { color: '#f1f5f9' }, ticks: { color: '#64748b' }, 
+        title: { display: true, text: 'Temperatura (T) [°C]', color: '#a1a1aa', font: {family: "'JetBrains Mono', monospace"} }, 
+        grid: { color: '#27272a' }, ticks: { color: '#a1a1aa', font: {family: "'JetBrains Mono', monospace"} }, 
         min: 0, max: Math.max(400, T_high + 20) 
       }
     },
     plugins: { 
-      legend: { labels: { color: '#0f172a', font: { family: "'Roboto Mono', monospace" } } },
-      tooltip: { callbacks: { label: (ctx) => `s: ${ctx.parsed.x.toFixed(4)}, T: ${ctx.parsed.y} °C` } }
+      legend: { labels: { color: '#f8fafc', font: { family: "'JetBrains Mono', monospace" } } },
+      tooltip: { backgroundColor: '#000000', titleFont: {family: "'JetBrains Mono', monospace"}, bodyFont: {family: "'JetBrains Mono', monospace"}, callbacks: { label: (ctx) => `s: ${ctx.parsed.x.toFixed(4)}, T: ${ctx.parsed.y} °C` } }
     }
   };
 
-  return <Scatter data={data} options={options} />;
+  return (
+    <div style={{ height: '100%', width: '100%' }}>
+      <Scatter data={data} options={options} />
+    </div>
+  );
 }
