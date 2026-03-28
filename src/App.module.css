@@ -8,7 +8,7 @@
 /* Lado Esquerdo - Fixo */
 .leftPane {
   width: 450px;
-  min-width: 400px;
+  max-width: 100%; /* Correção para o mobile não cortar a tela */
   background: var(--bg-panel);
   border-right: 1px solid var(--border-line);
   display: flex;
@@ -33,6 +33,7 @@
   border-radius: 6px;
   padding: 1.5rem;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  overflow-x: auto; /* MÁGICA DO MOBILE: Permite deslizar a matemática para o lado */
 }
 .statusTitle {
   font-size: 1rem;
@@ -47,7 +48,7 @@
   font-size: 0.75rem;
   color: var(--text-dim);
   margin: 6px 0;
-  white-space: pre-wrap; /* Mantém o formato da matemática */
+  white-space: pre; /* Garante que a fórmula fique alinhada como código fonte */
   line-height: 1.6;
 }
 
@@ -80,8 +81,10 @@
 
 .footer { margin-top: auto; padding-top: 2rem; font-size: 0.75rem; color: var(--text-dim); text-align: center; font-family: var(--font-mono); }
 
+/* Responsividade Mobile Corrigida */
 @media (max-width: 1024px) {
   .layout { flex-direction: column; overflow: auto; }
-  .leftPane { width: 100%; border-right: none; border-bottom: 1px solid var(--border-line); }
-  .rightPane { overflow: visible; }
+  .leftPane { width: 100%; border-right: none; border-bottom: 1px solid var(--border-line); flex: none; padding: 1.5rem; }
+  .rightPane { overflow: visible; flex: none; padding: 1.5rem; }
+  .chartContainer { height: 350px; }
 }
