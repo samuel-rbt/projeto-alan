@@ -1,23 +1,66 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --bg-main: #f1f5f9;      /* Fundo cinza claro */
-  --bg-card: #ffffff;      /* Branco puro para áreas de trabalho */
-  --primary: #1e40af;      /* Azul Marinho */
-  --primary-light: #dbeafe;
-  --text-main: #1e293b;    /* Cinza quase preto */
+  /* Paleta Exclusiva Alan - "Clean Lab" */
+  --bg-page: #f1f5f9;
+  --bg-surface: #ffffff;
+  --primary: #06b6d4; /* Ciano / Azul Água */
+  --primary-dark: #0891b2;
+  --text-dark: #0f172a;
   --text-muted: #64748b;
-  --border: #e2e8f0;
-  --accent: #3b82f6;       /* Azul brilhante */
+  --border-color: #cbd5e1;
   
+  --state-liq: #3b82f6; /* Azul */
+  --state-vap: #f59e0b; /* Laranja */
+  --state-mix: #10b981; /* Verde */
+
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
 }
 
 body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background: var(--bg-page);
+  color: var(--text-dark);
   font-family: var(--font-sans);
-  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+
+input[type=number] {
+  width: 100%;
+  background: var(--bg-page);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+}
+input[type=number]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+}
+
+button {
+  width: 100%;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+button:hover { background: var(--primary-dark); transform: translateY(-1px); }
+button:active { transform: translateY(0); }
