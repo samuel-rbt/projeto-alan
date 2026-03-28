@@ -157,8 +157,8 @@ export default function App() {
       {/* PAINEL ESQUERDO: CONTROLES E CÓDIGO */}
       <aside className={styles.leftPane}>
         <div className={styles.header}>
-          <div className={styles.title}>H2O<span>_</span>SYNC</div>
-          <div className={styles.subtitle}>// Data Terminal</div>
+          <div className={styles.title}>Termodinamica<span></span></div>
+          <div className={styles.subtitle}>// Agua, pressão e vapor</div>
         </div>
 
         <div className={styles.inputGroup}>
