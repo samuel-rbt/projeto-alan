@@ -154,7 +154,7 @@ export default function App() {
   return (
     <div className={styles.layout}>
       
-      {/* PAINEL ESQUERDO: CONTROLES E CÓDIGO */}
+
       <aside className={styles.leftPane}>
         <div className={styles.header}>
           <div className={styles.title}>Termodinamica<span></span></div>
@@ -189,7 +189,7 @@ export default function App() {
         )}
 
         <div className={styles.footer}>
-          root@alan:~# dev: Alan Cotts dos Anjos Fernandes<br/>root@alan:~# matricula: 29636001
+          Aluno: Alan Cotts dos Anjos Fernandes<br/>matricula: 29636001
         </div>
       </aside>
 
