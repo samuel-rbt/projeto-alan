@@ -158,7 +158,7 @@ export default function App() {
       <aside className={styles.leftPane}>
         <div className={styles.header}>
           <div className={styles.title}>Termodinamica<span></span></div>
-          <div className={styles.subtitle}>// Agua, pressão e vapor</div>
+          <div className={styles.subtitle}>Agua e Vapor</div>
         </div>
 
         <div className={styles.inputGroup}>
